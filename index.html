@@ -11,10 +11,11 @@
         :root {
             --bg: #000000;
             --bg-card: #0a0a0a;
+            --bg-card-hover: #121212;
             --text-main: #ffffff;
             --text-dim: #8a8a8e;
-            --accent: #ffffff;
             --border: #222222;
+            --border-hover: #444444;
         }
 
         * { 
@@ -30,20 +31,20 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             min-height: 100vh;
-            background-image: radial-gradient(circle at 50% 0%, #111111 0%, #000000 60%);
+            background-image: radial-gradient(circle at 50% 0%, #151515 0%, #000000 60%);
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 80px 24px;
         }
 
-        /* --- Навигация (Ссылка на ТГ) --- */
+        /* --- Навигация --- */
         .nav {
             display: flex;
             justify-content: flex-end;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
         .contact-link {
             display: inline-flex;
@@ -53,16 +54,19 @@
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            padding: 10px 16px;
+            padding: 10px 20px;
             border: 1px solid var(--border);
-            border-radius: 8px;
-            transition: all 0.2s ease;
-            background: var(--bg-card);
+            border-radius: 30px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(10, 10, 10, 0.5);
+            backdrop-filter: blur(10px);
         }
         .contact-link:hover {
-            background: #161616;
-            border-color: #333;
-            transform: translateY(-1px);
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255,255,255,0.1);
         }
         .contact-link svg {
             width: 16px;
@@ -70,46 +74,69 @@
             fill: currentColor;
         }
 
-        /* --- Профиль --- */
+        /* --- Профиль (Hero) --- */
         .profile {
-            margin-bottom: 80px;
-            animation: fadeIn 0.8s ease;
+            margin-bottom: 100px;
+            animation: fadeUp 0.8s ease forwards;
         }
         .profile h1 {
-            font-size: 48px;
+            font-size: 56px;
             font-weight: 600;
             letter-spacing: 0.15em;
             text-transform: lowercase;
             font-variant: small-caps;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             color: var(--text-main);
+            line-height: 1.1;
+        }
+        .profile .role {
+            font-size: 20px;
+            color: var(--text-main);
+            font-weight: 500;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .role-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff41;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ff41;
         }
         .profile p {
             font-size: 18px;
             color: var(--text-dim);
-            max-width: 500px;
+            max-width: 600px;
             font-weight: 300;
-        }
-        .profile p strong {
-            color: var(--text-main);
-            font-weight: 500;
+            line-height: 1.7;
         }
 
-        /* --- Сетка проектов --- */
+        /* --- Заголовки --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+        }
         .section-title {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
-            color: var(--text-dim);
+            color: var(--text-main);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 24px;
+            letter-spacing: 0.1em;
         }
 
+        /* --- Карточки проектов --- */
         .projects-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 16px;
-            animation: fadeIn 1s ease 0.2s both;
+            margin-bottom: 100px;
+            animation: fadeUp 1s ease 0.2s both;
         }
 
         .project-card {
@@ -121,41 +148,26 @@
             color: inherit;
             display: flex;
             flex-direction: column;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
         }
         .project-card:hover {
-            border-color: #444;
-            transform: translateY(-2px);
-            background: #0f0f0f;
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            background: var(--bg-card-hover);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
-        .project-card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        .project-card:hover::after {
-            opacity: 1;
-        }
-
         .project-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
         .project-card h3 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 600;
             color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
         .project-arrow {
             opacity: 0;
@@ -172,12 +184,124 @@
             font-size: 15px;
             color: var(--text-dim);
             font-weight: 400;
-            line-height: 1.5;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+        .tag {
+            font-size: 12px;
+            color: var(--text-dim);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        .project-card:hover .tag {
+            border-color: var(--border);
+            color: var(--text-main);
+        }
+
+        /* --- Секция Услуг --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 100px;
+            animation: fadeUp 1.2s ease 0.4s both;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+        }
+        .service-icon {
+            font-size: 24px;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        .service-card h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+        .service-card p {
+            font-size: 14px;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        /* --- Блок "Связь" (Внизу) --- */
+        .contact-section {
+            text-align: center;
+            padding: 60px 20px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(20,20,20,0.5) 0%, rgba(10,10,10,0.8) 100%);
+            margin-bottom: 60px;
+            animation: fadeUp 1.4s ease 0.6s both;
+        }
+        .contact-section h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .contact-section p {
+            color: var(--text-dim);
+            font-size: 15px;
+            max-width: 500px;
+            margin: 0 auto 32px;
+        }
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: #fff;
+            color: #000;
+        }
+        .btn-primary:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 1px solid var(--border-hover);
+        }
+        .btn-secondary:hover {
+            background: #1a1a1a;
+            transform: translateY(-2px);
         }
 
         /* --- Футер --- */
         footer {
-            margin-top: 100px;
             padding-top: 24px;
             border-top: 1px solid var(--border);
             color: var(--text-dim);
@@ -190,14 +314,15 @@
             color: var(--text-dim);
             text-decoration: none;
             transition: color 0.2s;
+            margin-left: 10px;
         }
         footer a:hover {
             color: var(--text-main);
         }
 
         /* --- Анимации --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -205,10 +330,15 @@
         @media (max-width: 600px) {
             .container { padding: 40px 20px; }
             .nav { margin-bottom: 40px; }
-            .profile h1 { font-size: 36px; }
+            .profile h1 { font-size: 38px; }
+            .profile .role { font-size: 18px; }
             .profile p { font-size: 16px; }
             .project-card { padding: 24px; }
+            .project-card h3 { font-size: 20px; }
+            .contact-section { padding: 40px 20px; }
+            .contact-section h2 { font-size: 24px; }
             footer { flex-direction: column; gap: 10px; align-items: flex-start; }
+            footer a { margin-left: 0; margin-right: 10px; }
         }
     </style>
 </head>
@@ -216,7 +346,7 @@
 
     <div class="container">
         
-        <!-- Навигация с контактом -->
+        <!-- Навигация -->
         <nav class="nav">
             <a href="https://t.me/eyxop" target="_blank" class="contact-link">
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.11.03-1.87 1.19-5.3 3.5-.5.34-.95.51-1.36.5-.45-.01-1.31-.25-1.95-.46-.78-.26-1.4-.4-1.35-.85.03-.23.36-.47 1-.72 3.91-1.7 6.52-2.82 7.83-3.37 3.72-1.54 4.5-1.81 5-1.82.11 0 .36.03.52.15.14.1.18.24.2.34.02.1.02.29 0 .44z"/></svg>
@@ -227,12 +357,17 @@
         <!-- Профиль -->
         <section class="profile">
             <h1>HITOVSKY</h1>
-            <p>Coding for <strong>2 years</strong>. Focused on Telegram API, Telegram Bots, and seamless API integrations.</p>
+            <div class="role">
+                <span class="role-dot"></span> Developer / 2 years experience
+            </div>
+            <p>Специализируюсь на Telegram API, разработке ботов и интеграциях. Создаю комплексные цифровые решения, автоматизирую процессы и разрабатываю индивидуальный софт под задачи людей.</p>
         </section>
 
         <!-- Проекты -->
         <main>
-            <div class="section-title">Проекты</div>
+            <div class="section-header">
+                <div class="section-title">Проекты</div>
+            </div>
             
             <div class="projects-grid">
                 <!-- HitSearch -->
@@ -242,6 +377,11 @@
                         <svg class="project-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </div>
                     <p>Система универсального поиска информации по открытым источникам и внутренней базе данных. Быстрый доступ к цифровому досье.</p>
+                    <div class="project-tags">
+                        <span class="tag">Telegram Bot</span>
+                        <span class="tag">OSINT</span>
+                        <span class="tag">Data Parsing</span>
+                    </div>
                 </a>
 
                 <!-- Hit-AI -->
@@ -250,7 +390,12 @@
                         <h3>Hit-AI</h3>
                         <svg class="project-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </div>
-                    <p>Telegram-бот с ИИ, объединяющий несколько AI-провайдеров в единую цепочку. Сам определяет тип задачи, выбирает модель и переключается на резерв при сбоях.</p>
+                    <p>Telegram-бот с ИИ, объединяющий несколько AI-провайдеров в единую цепочку. Сам определяет тип задачи, выбирает модель и переключается на резерв при сбоях. Понимает текст, изображения и голос.</p>
+                    <div class="project-tags">
+                        <span class="tag">AI Routing</span>
+                        <span class="tag">Multi-Model</span>
+                        <span class="tag">Vision & Voice</span>
+                    </div>
                 </a>
 
                 <!-- HitStars -->
@@ -259,15 +404,60 @@
                         <h3>HitStars</h3>
                         <svg class="project-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </div>
-                    <p>Партнёрский бот для покупки звёзд, NFT, аренды юзернеймов и анонимных номеров. Имеет встроенный Web App для удобного выбора и оплаты.</p>
+                    <p>Партнёрский экосистемный бот для управления цифровыми активами. Покупка звёзд, NFT, аренда юзернеймов и анонимных номеров. Встроенный Web App для удобного выбора и оплаты.</p>
+                    <div class="project-tags">
+                        <span class="tag">Telegram Stars</span>
+                        <span class="tag">Web App</span>
+                        <span class="tag">NFT & Usernames</span>
+                    </div>
                 </a>
             </div>
+
+            <!-- Услуги -->
+            <div class="section-header">
+                <div class="section-title">Индивидуальная разработка</div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">🤖</span>
+                    <h4>Telegram Боты</h4>
+                    <p>Разработка ботов любой сложности: от простых утилит до сложных систем с Web App, оплатой и базами данных.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">⚡</span>
+                    <h4>Автоматизация</h4>
+                    <p>Парсеры, скрипты, автопостинг, интеграции с API. Избавлю от рутины и автоматизирую бизнес-процессы.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">💻</span>
+                    <h4>Софт и RATs</h4>
+                    <p>Разработка кастомных программ, панелей управления и специализированного софта под ваши задачи.</p>
+                </div>
+            </div>
+
+            <!-- Контакты (внизу) -->
+            <section class="contact-section">
+                <h2>Обсудить проект</h2>
+                <p>По всем вопросам разработки, уточнения деталей, стоимости и оплаты — пишите в личные сообщения. Все обсуждается индивидуально.</p>
+                <div class="contact-buttons">
+                    <a href="https://t.me/eyxop" target="_blank" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.11.03-1.87 1.19-5.3 3.5-.5.34-.95.51-1.36.5-.45-.01-1.31-.25-1.95-.46-.78-.26-1.4-.4-1.35-.85.03-.23.36-.47 1-.72 3.91-1.7 6.52-2.82 7.83-3.37 3.72-1.54 4.5-1.81 5-1.82.11 0 .36.03.52.15.14.1.18.24.2.34.02.1.02.29 0 .44z"/></svg>
+                        @eyxop
+                    </a>
+                    <a href="https://t.me/ehgod" target="_blank" class="btn btn-secondary">
+                        @ehgod
+                    </a>
+                </div>
+            </section>
         </main>
 
         <!-- Футер -->
         <footer>
             <span>&copy; 2026 HITOVSKY</span>
-            <a href="https://t.me/eyxop" target="_blank">@eyxop</a>
+            <div>
+                <a href="https://t.me/eyxop" target="_blank">@eyxop</a>
+                <a href="https://t.me/ehgod" target="_blank">@ehgod</a>
+            </div>
         </footer>
     </div>
 
